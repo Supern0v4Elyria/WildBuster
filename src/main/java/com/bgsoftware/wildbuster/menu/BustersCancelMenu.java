@@ -55,7 +55,7 @@ public final class BustersCancelMenu extends WildMenu {
     }
 
     private Inventory buildInventory(int page){
-        inventory = createInventory(InventoryType.CHEST, 9 * 5, ChatColor.BOLD + "Cancelling Menu");
+        inventory = createInventory(InventoryType.CHEST, 9 * 5, ChatColor.BOLD + "Annulation");
 
         List<OfflinePlayer> players = new ArrayList<>();
         plugin.getBustersManager().getPlayerBusters().forEach(playerBuster -> {
@@ -70,7 +70,7 @@ public final class BustersCancelMenu extends WildMenu {
             int bustersAmount = plugin.getBustersManager().getPlayerBusters(player).size();
             inventory.setItem(slot, new ItemBuilder(Materials.PLAYER_HEAD.parseItem())
                     .setDisplayName(ChatColor.GREEN + player.getName())
-                    .setLore(ChatColor.GRAY + player.getName() + " has " + bustersAmount + " running busters.", ChatColor.GRAY + player.getUniqueId().toString())
+                    .setLore(ChatColor.GRAY + player.getName() + " à " + bustersAmount + " ChunkBuster en cours !", ChatColor.GRAY + player.getUniqueId().toString())
                     .setOwner(player.getName())
                     .build());
         }
@@ -83,12 +83,12 @@ public final class BustersCancelMenu extends WildMenu {
 
         //Set next page
         int maxPages = players.size() % 36 == 0 ? players.size() / 36 : (players.size() / 36) + 1;
-        String nextLore = page + 2 <= maxPages ? (ChatColor.GRAY + "Page " + (page + 2)) : (ChatColor.GRAY + "Current page");
-        inventory.setItem(42, new ItemBuilder(Material.PAPER).setDisplayName(ChatColor.GREEN + "Next Page").setLore(nextLore).build());
+        String nextLore = page + 2 <= maxPages ? (ChatColor.GRAY + "Page " + (page + 2)) : (ChatColor.GRAY + "Page actuelle");
+        inventory.setItem(42, new ItemBuilder(Material.PAPER).setDisplayName(ChatColor.GREEN + "Page suivante").setLore(nextLore).build());
 
         //Set previous page
-        String previousLore = page > 0 ? (ChatColor.GRAY + "Page " + page) : (ChatColor.GRAY + "Current page");
-        inventory.setItem(38, new ItemBuilder(Material.PAPER).setDisplayName(ChatColor.GREEN + "Previous Page").setLore(previousLore).build());
+        String previousLore = page > 0 ? (ChatColor.GRAY + "Page " + page) : (ChatColor.GRAY + "Page actuelle");
+        inventory.setItem(38, new ItemBuilder(Material.PAPER).setDisplayName(ChatColor.GREEN + "Page précédente").setLore(previousLore).build());
 
         return inventory;
     }
